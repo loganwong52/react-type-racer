@@ -13,7 +13,14 @@
 
 }
 
-#user-input {
+/* #user-input {
   color: green;
+} */
 
+.correct-input {
+  color: green;
+}
+
+.incorrect-input {
+  color: red;
 }

@@ -8,10 +8,14 @@ import UserInputForm from './components/UserInputForm'
 
 
 function App() {
+  // The text that the user follows to type
   const [paragraph, setParagraph] = useState('test')
 
+  // The text that is displayed when the user types
   const [userInput, setUserInput] = useState('**userInput will appear here**')
 
+  // The number of characters the user has typed in the input form
+  const [numChars, setNumChars] = useState(0)
 
   const callAPI = () => {
     return axios.get('http://metaphorpsum.com/paragraphs/1/5')
@@ -22,7 +26,7 @@ function App() {
       const jsonResponse = await callAPI()
 
       const response = jsonResponse.data
-      console.log(response.split(''))
+      // console.log(response.split(''))
 
 
       setParagraph(jsonResponse.data)
@@ -32,9 +36,15 @@ function App() {
     }
   }
 
+  // On mounting, get the paragraph
   useEffect(() => {
     getData()
   }, [])
+
+  // whenever the length of userInput updates, print the length
+  useEffect(() => {
+    // console.log(numChars)
+  }, [numChars])
 
 
 
@@ -47,10 +57,10 @@ function App() {
       <Paragraph paragraph={paragraph} />
       <hr />
 
-      <UserPara userInput={userInput} />
+      <UserPara userInput={userInput} paragraph={paragraph} />
+      <br />
 
-
-      <UserInputForm setUserInput={setUserInput} />
+      <UserInputForm setUserInput={setUserInput} setNumChars={setNumChars} />
 
 
     </div>

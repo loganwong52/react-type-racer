@@ -1,13 +1,20 @@
 import Form from 'react-bootstrap/Form'
 
 
-function UserInputForm({ setUserInput }) {
+function UserInputForm({ setUserInput, setNumChars }) {
 
     const handleChange = (event) => {
-        const value = event.target.value
+        let value = event.target.value
+        let numChars = value.length
         // console.log(`${value} val changed`)
+        // console.log(`${value.length}`)
+        if (value === "") {
+            value = "**userInput will appear here**"
+            numChars = 0
+        }
 
         setUserInput(value)
+        setNumChars(numChars)
     }
 
 
